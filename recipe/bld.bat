@@ -12,17 +12,7 @@ set BUILDDATE=%%a
 go generate ./...
 if errorlevel 1 exit 1
 
-rem -- Generate the UI HTML (don't really understand why)
-cd origin_ui\src
-call npm install
-if errorlevel 1 exit 1
-@echo on
-call npm run build
-if errorlevel 1 exit 1
-@echo on
-
 rem -- run the build
-cd "%SRC_DIR%"
 go build ^
   -a ^
   -ldflags "-w -s -X main.version=%PKG_VERSION% -X main.commit=v%PKG_VERSION% -X main.date=%BUILD_DATE% -X main.builtBy=conda-forge" ^
