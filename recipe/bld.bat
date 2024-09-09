@@ -1,7 +1,5 @@
 @echo on
 
-set CGO_ENABLED=0
-
 rem -- get build datetime
 for /f "tokens=*" %%a in (
 'python -c "import datetime; print(datetime.datetime.now(datetime.UTC).strftime('%%Y-%%m-%%dT%%H:%%M:%%SZ'))"'
