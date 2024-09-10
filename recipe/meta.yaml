@@ -1,5 +1,5 @@
 {% set name = "pelicanplatform" %}
-{% set version = "7.8.8" %}
+{% set version = "7.9.8" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   - url: https://github.com/PelicanPlatform/pelican/archive/v{{ version }}.tar.gz
-    sha256: 4664250afa36f0d169bce0ed50cce365afcf5709c9d734016e3b25ede63a0e94
+    sha256: 4a870fcce568fc66317df8ed074a4f86db27a5f972aaf8368a23ea8b0f93eabb
   - url: https://gitlab.com/cznic/mathutil/-/raw/v1.5.0/LICENSE
     sha256: bfa9bf72a72ca009fd62a8f84fca3dca67e51d93af96352723646599898b6cf5
     fn: mathutil-LICENSE
