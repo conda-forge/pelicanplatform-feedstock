@@ -13,7 +13,7 @@ source:
     fn: mathutil-LICENSE
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -23,6 +23,7 @@ requirements:
 test:
   commands:
     - pelican --help
+    - pelican --version
     - pelican object copy --help
 
 about:
