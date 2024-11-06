@@ -4,16 +4,19 @@ rem -- get build datetime
 for /f "tokens=*" %%a in (
 'python -c "import datetime; print(datetime.datetime.now(datetime.UTC).strftime('%%Y-%%m-%%dT%%H:%%M:%%SZ'))"'
 ) do (
-set BUILDDATE=%%a
+set BUILD_DATE=%%a
 )
 
 go generate ./...
 if errorlevel 1 exit 1
 
+set "CONFIG_PKG=github.com/pelicanplatform/pelican/config"
+set "LDFLAGS=-w -s -X %CONFIG_PKG%.version=%PKG_VERSION% -X %CONFIG_PKG%.commit=v%PKG_VERSION% -X %CONFIG_PKG%.date=%BUILD_DATE% -X %CONFIG_PKG%.builtBy=conda-forge"
+
 rem -- run the build
 go build ^
   -a ^
-  -ldflags "-w -s -X main.version=%PKG_VERSION% -X main.commit=v%PKG_VERSION% -X main.date=%BUILD_DATE% -X main.builtBy=conda-forge" ^
+  -ldflags "%LDFLAGS%" ^
   -tags forceposix ^
   -p "%CPU_COUNT%" ^
   -v ^

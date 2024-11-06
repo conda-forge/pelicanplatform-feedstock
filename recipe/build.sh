@@ -5,10 +5,21 @@ set -ex
 # dynamically generate content
 GOARCH="" GOOS="" go generate ./...
 
+# set variables for build
+CONFIG_PKG="github.com/pelicanplatform/pelican/config"
+LDFLAGS="
+  -s
+  -w
+  -X ${CONFIG_PKG}.version=${PKG_VERSION}
+  -X ${CONFIG_PKG}.commit=v${PKG_VERSION}
+  -X ${CONFIG_PKG}.date=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+  -X ${CONFIG_PKG}.builtBy=conda-forge
+"
+
 # build and install
 go build \
   -a \
-  -ldflags "-w -s -X main.version=${PKG_VERSION} -X main.commit=v${PKG_VERSION} -X main.date=$(date -u +"%Y-%m-%dT%H:%M:%SZ") -X main.builtBy=conda-forge" \
+  -ldflags "${LDFLAGS}" \
   -tags forceposix \
   -p ${CPU_COUNT} \
   -v \
