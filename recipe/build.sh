@@ -6,7 +6,7 @@ set -ex
 GOARCH="" GOOS="" go generate ./...
 
 # set variables for build
-CONFIG_PKG="github.com/pelicanplatform/pelican/config"
+CONFIG_PKG="github.com/pelicanplatform/pelican/version"
 LDFLAGS="
   -s
   -w
