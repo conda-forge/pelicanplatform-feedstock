@@ -13,7 +13,7 @@ source:
     fn: mathutil-LICENSE
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -24,6 +24,8 @@ test:
   commands:
     - pelican --help
     - pelican --version
+    # check that the metadata variables are set correctly
+    - "pelican --version | grep -q 'Version: {{ version }}'"  # [unix]
     - pelican object copy --help
 
 about:
