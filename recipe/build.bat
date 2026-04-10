@@ -26,5 +26,9 @@ if errorlevel 1 exit 1
 
 rem -- generate the license pack
 go get ./...
-go-licenses save .\cmd --save_path license-files --ignore "modernc.org/mathutil"
+go-licenses save ^
+  --save_path license-files ^
+  --ignore "modernc.org/mathutil" ^
+  --ignore "github.com/jmespath/go-jmespath" ^
+  .\cmd
 if errorlevel 1 exit 1
