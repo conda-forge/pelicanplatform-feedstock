@@ -10,7 +10,7 @@ set BUILD_DATE=%%a
 go generate ./...
 if errorlevel 1 exit 1
 
-set "CONFIG_PKG=github.com/pelicanplatform/pelican/config"
+set "CONFIG_PKG=github.com/pelicanplatform/pelican/version"
 set "LDFLAGS=-w -s -X %CONFIG_PKG%.version=%PKG_VERSION% -X %CONFIG_PKG%.commit=v%PKG_VERSION% -X %CONFIG_PKG%.date=%BUILD_DATE% -X %CONFIG_PKG%.builtBy=conda-forge"
 
 rem -- run the build
