@@ -8,7 +8,7 @@ set BUILD_DATE=%%a
 )
 
 go generate ./...
-if errorlevel 1 exit 1
+if %ERRORLEVEL% neq 0 exit 1
 
 set "CONFIG_PKG=github.com/pelicanplatform/pelican/version"
 set "LDFLAGS=-w -s -X %CONFIG_PKG%.version=%PKG_VERSION% -X %CONFIG_PKG%.commit=v%PKG_VERSION% -X %CONFIG_PKG%.date=%BUILD_DATE% -X %CONFIG_PKG%.builtBy=conda-forge"
@@ -22,7 +22,7 @@ go build ^
   -v ^
   -o "%LIBRARY_BIN%\pelican.exe" ^
   .\cmd
-if errorlevel 1 exit 1
+if %ERRORLEVEL% neq 0 exit 1
 
 rem -- generate the license pack
 go get ./...
@@ -31,4 +31,4 @@ go-licenses save ^
   --ignore "modernc.org/mathutil" ^
   --ignore "github.com/jmespath/go-jmespath" ^
   .\cmd
-if errorlevel 1 exit 1
+if %ERRORLEVEL% neq 0 exit 1
