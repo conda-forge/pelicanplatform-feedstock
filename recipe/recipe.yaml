@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: pelicanplatform
-  version: "7.24.2"
+  version: "7.24.3"
 
 package:
   name: ${{ name|lower }}
@@ -10,7 +10,7 @@ package:
 
 source:
   - url: https://github.com/PelicanPlatform/pelican/archive/v${{ version }}.tar.gz
-    sha256: fbb92fc3d515317be7c6763f51061628d8a8140b758e3f8c253479b69208fa7d
+    sha256: fd73d4c9193f3a25d82c696e7269d10f84f4941786e957c8dffa1562d4b605a0
   - url: https://gitlab.com/cznic/mathutil/-/raw/v1.5.0/LICENSE
     sha256: bfa9bf72a72ca009fd62a8f84fca3dca67e51d93af96352723646599898b6cf5
     file_name: LICENSE-mathutil
