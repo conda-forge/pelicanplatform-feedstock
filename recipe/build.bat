@@ -30,5 +30,6 @@ go-licenses save ^
   --save_path license-files ^
   --ignore "modernc.org/mathutil" ^
   --ignore "github.com/jmespath/go-jmespath" ^
+  --ignore "go.opentelemetry.io/otel/exporters/jaeger/internal/third_party/thrift/lib/go/thrift" ^
   .\cmd
 if %ERRORLEVEL% neq 0 exit 1

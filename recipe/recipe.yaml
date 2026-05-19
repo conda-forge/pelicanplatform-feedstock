@@ -17,6 +17,9 @@ source:
   - url: https://raw.githubusercontent.com/jmespath/go-jmespath/refs/tags/v0.4.0/LICENSE
     sha256: 03cfaf331a260694d06227a589cdd2b5fcfab474697b72e250736696c313655a
     file_name: LICENSE-jmespath
+  - url: https://raw.githubusercontent.com/open-telemetry/opentelemetry-go/refs/tags/v1.43.0/LICENSE
+    sha256: 1ae07514be1d7bb33f0698f8d91fb51b8b9fe1463157ec1c72081a49b9bc6f40
+    file_name: LICENSE-opentelemetry
 
 build:
   number: 0
@@ -46,6 +49,7 @@ about:
     - LICENSE
     - LICENSE-jmespath
     - LICENSE-mathutil
+    - LICENSE-opentelemetry
     - license-files/
 
 extra:
