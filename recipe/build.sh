@@ -31,5 +31,6 @@ go get ./...
 go-licenses save \
   --ignore "modernc.org/mathutil" \
   --ignore "github.com/jmespath/go-jmespath" \
+  --ignore "go.opentelemetry.io/otel/exporters/jaeger/internal/third_party/thrift/lib/go/thrift" \
   --save_path license-files \
   ./cmd
