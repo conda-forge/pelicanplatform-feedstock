@@ -2,15 +2,15 @@ schema_version: 1
 
 context:
   name: pelicanplatform
-  version: "7.25.2"
+  version: "7.26.0"
 
-package:
+recipe:
   name: ${{ name|lower }}
   version: ${{ version }}
 
 source:
   - url: https://github.com/PelicanPlatform/pelican/archive/v${{ version }}.tar.gz
-    sha256: be8edaa71a225b7fafe5134f407dab45bb610f46db119f8b2dd9b6c6924626a7
+    sha256: 01276ecf8521f303b1cb0394d07b84629b81cfe1ac9d6261692f5947d8093fb9
   - url: https://gitlab.com/cznic/mathutil/-/raw/v1.5.0/LICENSE
     sha256: bfa9bf72a72ca009fd62a8f84fca3dca67e51d93af96352723646599898b6cf5
     file_name: LICENSE-mathutil
@@ -22,20 +22,65 @@ source:
     file_name: LICENSE-opentelemetry
 
 build:
+  dynamic_linking:
+    overdepending_behavior: error
   number: 0
 
-requirements:
-  build:
-    - ${{ compiler('go') }}
-    - go-licenses
+outputs:
+  - staging:
+      name: pelicanplatform-build
+    build:
+      script:
+        env:
+          PKG_VERSION: ${{ version }}
+        file: build
+    requirements:
+      build:
+        - ${{ compiler('go') }}
+        - go-licenses
 
-tests:
-  - script:
-      - pelican --help
-      - pelican --version
-      - if: unix
-        then: "pelican --version | grep -q 'Version: ${{ version }}'"
-      - pelican object copy --help
+  - package:
+      name: pelicanplatform
+    inherit: pelicanplatform-build
+    build:
+      files:
+        - if: unix
+          then: bin/pelican
+          else: Library/bin/pelican.exe
+    tests:
+      - script:
+          - pelican --help
+          - pelican --version
+          - if: unix
+            then: "pelican --version | grep -q 'Version: ${{ version }}'"
+          - pelican object copy --help
+    about:
+      summary: The Pelican client
+      license_file:
+        - LICENSE
+        - client-licenses/
+
+
+  - package:
+      name: pelicanplatform-server
+    inherit: pelicanplatform-build
+    build:
+      files:
+        - bin/pelican-server
+      skip:
+        - win
+    tests:
+      - script:
+          - pelican-server --help
+          - pelican-server --version
+    about:
+      summary: The Pelican client
+      license_file:
+        - LICENSE
+        - LICENSE-jmespath
+        - LICENSE-mathutil
+        - LICENSE-opentelemetry
+        - server-licenses/
 
 about:
   summary: The Pelican command line tool
@@ -45,12 +90,7 @@ about:
   homepage: https://github.com/PelicanPlatform/pelican
   repository: https://github.com/PelicanPlatform/pelican
   license: Apache-2.0
-  license_file:
-    - LICENSE
-    - LICENSE-jmespath
-    - LICENSE-mathutil
-    - LICENSE-opentelemetry
-    - license-files/
+  license_file: LICENSE
 
 extra:
   recipe-maintainers:
