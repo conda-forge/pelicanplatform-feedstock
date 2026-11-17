@@ -39,7 +39,6 @@ go build \
   ./cmd
 
 # generate the license pack
-go get ./...
 for tag in client server; do
   export GOFLAGS="-tags=forceposix,${tag}"
   go-licenses save \
